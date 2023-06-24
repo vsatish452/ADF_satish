@@ -1,0 +1,71 @@
+{
+	"name": "DelimitedText4",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"flodername": {
+				"type": "string"
+			},
+			"copyname": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@concat(dataset().copyname,'.csv')",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().flodername",
+					"type": "Expression"
+				},
+				"container": "rawlayer"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Date/Time",
+				"type": "String"
+			},
+			{
+				"name": "Temp_C",
+				"type": "String"
+			},
+			{
+				"name": "Dew Point Temp_C",
+				"type": "String"
+			},
+			{
+				"name": "Rel Hum_%",
+				"type": "String"
+			},
+			{
+				"name": "Wind Speed_km/h",
+				"type": "String"
+			},
+			{
+				"name": "Visibility_km",
+				"type": "String"
+			},
+			{
+				"name": "Press_kPa",
+				"type": "String"
+			},
+			{
+				"name": "Weather",
+				"type": "String"
+			}
+		]
+	}
+}
