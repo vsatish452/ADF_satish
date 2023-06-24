@@ -1,0 +1,9 @@
+{
+	"name": "PWCADFY",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "470d7468-fc12-42b5-8814-005586ad315e",
+		"tenantId": "f4346ffa-d517-407a-b1c3-e0b24ab49b33"
+	}
+}

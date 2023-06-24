@@ -1,0 +1,33 @@
+{
+	"name": "sinlink",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "blobdateset",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"name": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@{concat(dataset().name,'/',dataset().name,'.csv')}",
+					"type": "Expression"
+				},
+				"folderPath": "SalesDB",
+				"container": "backupofdatalake"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

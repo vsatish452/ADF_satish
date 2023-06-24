@@ -1,0 +1,13 @@
+{
+	"name": "data_sql_united",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "linked_united",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

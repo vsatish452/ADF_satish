@@ -1,0 +1,6 @@
+{
+	"name": "selfhostskv",
+	"properties": {
+		"type": "SelfHosted"
+	}
+}

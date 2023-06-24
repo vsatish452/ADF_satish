@@ -1,0 +1,44 @@
+{
+	"name": "AzureSqlTable5",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase6",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "pipeline_name",
+				"type": "varchar"
+			},
+			{
+				"name": "data_factory_name",
+				"type": "varchar"
+			},
+			{
+				"name": "pipeline_time",
+				"type": "datetime",
+				"precision": 23,
+				"scale": 3
+			},
+			{
+				"name": "databricks_output",
+				"type": "varchar"
+			},
+			{
+				"name": "pipeline_type",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"table": "logs_s"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
