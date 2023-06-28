@@ -1,0 +1,12 @@
+{
+	"name": "datset_incremt",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlSKVDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
