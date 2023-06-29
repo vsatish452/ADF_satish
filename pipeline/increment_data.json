@@ -116,9 +116,62 @@
 				"outputs": [
 					{
 						"referenceName": "DelimitedText5",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"TableName": {
+								"value": "@activity('order_table_date').output.firstRow.TableName",
+								"type": "Expression"
+							},
+							"Max_date": {
+								"value": "@activity('new_watermarke_date').output.firstRow.max_date",
+								"type": "Expression"
+							}
+						}
 					}
 				]
+			},
+			{
+				"name": "Stored procedure",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Copy data1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[dbo].[update_new_date]",
+					"storedProcedureParameters": {
+						"new_date": {
+							"value": {
+								"value": "@activity('new_watermarke_date').output.firstRow.max_date",
+								"type": "Expression"
+							},
+							"type": "DateTime"
+						},
+						"table_name": {
+							"value": {
+								"value": "@activity('order_table_date').output.firstRow.TableName",
+								"type": "Expression"
+							},
+							"type": "String"
+						}
+					}
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSqlSKVDatabase",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"folder": {
