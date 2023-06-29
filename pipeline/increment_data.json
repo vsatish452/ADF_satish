@@ -23,7 +23,8 @@
 					"dataset": {
 						"referenceName": "datset_incremt",
 						"type": "DatasetReference"
-					}
+					},
+					"firstRowOnly": false
 				}
 			},
 			{
@@ -80,7 +81,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select * from dbo.order\nwhere order_date > '@{activity('new_watermarke_date').output.firstRow.watermark_date}' and '@{activity('order_table_date').output.firstRow.max_date}'",
+							"value": "select * from dbo.order\nwhere order_date < '@{activity('new_watermarke_date').output.firstRow.max_date}' and order_date > '@{activity('order_table_date').output.value.watermark_date}'",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -119,7 +120,7 @@
 						"type": "DatasetReference",
 						"parameters": {
 							"TableName": {
-								"value": "@activity('order_table_date').output.firstRow.TableName",
+								"value": "@activity('order_table_date').output.value.table_name",
 								"type": "Expression"
 							},
 							"Max_date": {
@@ -161,7 +162,7 @@
 						},
 						"table_name": {
 							"value": {
-								"value": "@activity('order_table_date').output.firstRow.TableName",
+								"value": "@activity('order_table_date').output.value.table_name",
 								"type": "Expression"
 							},
 							"type": "String"
