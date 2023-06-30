@@ -104,13 +104,13 @@
 				]
 			},
 			{
-				"name": "Lkp_update_max_d",
+				"name": "Lkp_update_max_d_copy1",
 				"type": "Lookup",
 				"dependsOn": [
 					{
 						"activity": "copy_tran_tabl_incremt",
 						"dependencyConditions": [
-							"Succeeded"
+							"Completed"
 						]
 					}
 				],
