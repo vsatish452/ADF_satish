@@ -53,7 +53,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "select * from @{pipeline().parameters.src_tablename}\nwhere @{pipeline().parameters.src_columnname} > @{activity('LKP config table').output.firstRow.waterMark}",
+							"value": "select * from @{pipeline().parameters.src_tablename} where @{pipeline().parameters.src_columnname} > @{activity('LKP config table').output.firstRow.waterMark}",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
