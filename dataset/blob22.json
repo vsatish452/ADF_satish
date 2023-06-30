@@ -10,8 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobStorageLocation",
-				"folderPath": "addhress",
-				"container": "new"
+				"folderPath": "Address",
+				"container": "pwc"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",
