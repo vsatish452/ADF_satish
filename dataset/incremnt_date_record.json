@@ -1,0 +1,30 @@
+{
+	"name": "incremnt_date_record",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase7",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "id",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "name",
+				"type": "varchar"
+			},
+			{
+				"name": "date",
+				"type": "date"
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "records"
+		}
+	}
+}
