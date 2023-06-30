@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "skvdatabase_dataset",
+						"referenceName": "skv_data",
 						"type": "DatasetReference"
 					},
 					"name": "order"
@@ -23,7 +23,12 @@
 			],
 			"transformations": [],
 			"scriptLines": [
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          order_id as integer,",
+				"          customer_name as string,",
+				"          order_date as date",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     enableCdc: true,",
 				"     mode: 'read',",
