@@ -1,0 +1,23 @@
+{
+	"name": "dataflow_dataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "rawAzureBloblinked",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"folderPath": "order",
+				"container": "pwc"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

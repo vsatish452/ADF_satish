@@ -1,0 +1,16 @@
+{
+	"name": "skvdatabase_dataset",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlSKVDatabase",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "orders"
+		}
+	}
+}
