@@ -126,7 +126,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "update dbo.config set waterMark = (select max(@{pipeline().parameters.src_columnname}) from @{pipeline().parameters.src_tablename}\nwhere table_name = '@{pipeline().parameters.src_tablename}'\nselect 1\n",
+							"value": "update dbo.config\nset waterMark = (\n    select max(@{pipeline().parameters.src_columnname})\n    from @{pipeline().parameters.src_tablename}\n)\nwhere table_name = '@{pipeline().parameters.src_tablename}';\n\nselect 1;\n",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
