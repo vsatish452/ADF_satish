@@ -32,7 +32,7 @@
 				"     validateSchema: false,",
 				"     enableCdc: true,",
 				"     mode: 'read',",
-				"     skipInitialLoad: true,",
+				"     skipInitialLoad: false,",
 				"     waterMarkColumn: 'order_date',",
 				"     isolationLevel: 'READ_UNCOMMITTED',",
 				"     format: 'table') ~> orderstable",
