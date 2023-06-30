@@ -18,7 +18,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "@select * from config where table_name = '@{pipeline().parameters.src_tablename}'",
+							"value": "select * from config where table_name = '@{pipeline().parameters.src_tablename}'",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
