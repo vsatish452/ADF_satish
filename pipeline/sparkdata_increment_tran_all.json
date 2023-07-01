@@ -139,6 +139,33 @@
 					},
 					"firstRowOnly": false
 				}
+			},
+			{
+				"name": "blob_to_Broze_copy1",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "Lkp_update_max_d_copy1",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/mosayesupadam1992@gmail.com/databricks_yesu/copy_blob_data_to_broze_parquet"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabric_pwc",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"parameters": {
