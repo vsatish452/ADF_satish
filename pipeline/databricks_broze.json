@@ -1,0 +1,32 @@
+{
+	"name": "databricks_broze",
+	"properties": {
+		"description": "copy the data from blob to broze layer and creating external tables",
+		"activities": [
+			{
+				"name": "blob_to_Broze",
+				"type": "DatabricksNotebook",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Repos/mosayesupadam1992@gmail.com/databricks_yesu/copy_blob_data_to_broze_parquet"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabric_pwc",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"folder": {
+			"name": "sparkdata"
+		},
+		"annotations": []
+	}
+}

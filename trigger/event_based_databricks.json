@@ -1,0 +1,26 @@
+{
+	"name": "event_based_databricks",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Stopped",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "databricks_broze",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/pwc/blobs/transactions/",
+			"blobPathEndsWith": ".csv",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/c26842e5-24a2-4162-84f6-bd128ec4d7fd/resourceGroups/pwc_dataengineer/providers/Microsoft.Storage/storageAccounts/blobpwcskv",
+			"events": [
+				"Microsoft.Storage.BlobCreated",
+				"Microsoft.Storage.BlobDeleted"
+			]
+		}
+	}
+}
