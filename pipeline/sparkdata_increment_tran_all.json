@@ -1,0 +1,157 @@
+{
+	"name": "sparkdata_increment_tran_all",
+	"properties": {
+		"description": "all date in one folder date wise",
+		"activities": [
+			{
+				"name": "LKP config table",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "select * from config where table_name = '@{pipeline().parameters.src_tablename}'",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "congtabledata",
+						"type": "DatasetReference"
+					}
+				}
+			},
+			{
+				"name": "copy_tran_tabl_incremt",
+				"type": "Copy",
+				"dependsOn": [
+					{
+						"activity": "LKP config table",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "@concat('SELECT * FROM ', pipeline().parameters.src_tablename, ' WHERE ', pipeline().parameters.src_columnname, ' > ''', activity('LKP config table').output.firstRow['waterMark'], '''')",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"typeConversion": true,
+						"typeConversionSettings": {
+							"allowDataTruncation": true,
+							"treatBooleanAsNumber": false
+						}
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "tran_dataset",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "sparkdata_sink_data",
+						"type": "DatasetReference",
+						"parameters": {
+							"table_name": {
+								"value": "@pipeline().parameters.src_tablename",
+								"type": "Expression"
+							},
+							"date_value": {
+								"value": "@activity('LKP config table').output.firstRow.waterMark",
+								"type": "Expression"
+							}
+						}
+					}
+				]
+			},
+			{
+				"name": "Lkp_update_max_d_copy1",
+				"type": "Lookup",
+				"dependsOn": [
+					{
+						"activity": "copy_tran_tabl_incremt",
+						"dependencyConditions": [
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"sqlReaderQuery": {
+							"value": "update dbo.config\nset waterMark = (\n    select max(@{pipeline().parameters.src_columnname})\n    from @{pipeline().parameters.src_tablename}\n)\nwhere table_name = '@{pipeline().parameters.src_tablename}';\n\nselect 1;\n",
+							"type": "Expression"
+						},
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "AzureSqlTable6",
+						"type": "DatasetReference"
+					},
+					"firstRowOnly": false
+				}
+			}
+		],
+		"parameters": {
+			"src_tablename": {
+				"type": "string"
+			},
+			"src_columnname": {
+				"type": "string"
+			}
+		},
+		"folder": {
+			"name": "sparkdata"
+		},
+		"annotations": []
+	}
+}
