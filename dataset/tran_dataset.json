@@ -1,5 +1,5 @@
 {
-	"name": "AzureSqlTable3",
+	"name": "tran_dataset",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlSKVDatabase",
@@ -8,6 +8,5 @@
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": []
-	},
-	"type": "Microsoft.DataFactory/factories/datasets"
+	}
 }

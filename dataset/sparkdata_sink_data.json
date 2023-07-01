@@ -1,0 +1,51 @@
+{
+	"name": "sparkdata_sink_data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobStorage1",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"table_name": {
+				"type": "string"
+			},
+			"date_value": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@concat(dataset().date_value,'/',dataset().table_name,'_',utcnow(),'.csv')",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().table_name",
+					"type": "Expression"
+				},
+				"container": "pwc"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "order_id",
+				"type": "String"
+			},
+			{
+				"name": "customer_name",
+				"type": "String"
+			},
+			{
+				"name": "order_date",
+				"type": "String"
+			}
+		]
+	}
+}

@@ -1,5 +1,5 @@
 {
-	"name": "AzureSqlTable2",
+	"name": "datset_incremt",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureSqlSKVDatabase",
@@ -7,7 +7,10 @@
 		},
 		"annotations": [],
 		"type": "AzureSqlTable",
-		"schema": []
-	},
-	"type": "Microsoft.DataFactory/factories/datasets"
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "watermark"
+		}
+	}
 }
