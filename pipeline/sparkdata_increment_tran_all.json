@@ -166,6 +166,33 @@
 					"referenceName": "AzureDatabric_pwc",
 					"type": "LinkedServiceReference"
 				}
+			},
+			{
+				"name": "rawlayer_to_process",
+				"type": "DatabricksNotebook",
+				"dependsOn": [
+					{
+						"activity": "blob_to_Broze_copy1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"notebookPath": "/Shared/rawlayer_processinglayer"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureDatabric_pwc",
+					"type": "LinkedServiceReference"
+				}
 			}
 		],
 		"parameters": {
